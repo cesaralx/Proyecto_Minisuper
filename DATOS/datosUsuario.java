@@ -5,6 +5,9 @@
  */
 package DATOS;
 
+import MODELO.Categoria;
+import MODELO.Empleado;
+import MODELO.Producto;
 import MODELO.Usuario;
 import VISTA.frmRegUsuario;
 import VISTA.frmUsuario;
@@ -15,32 +18,45 @@ import java.util.ArrayList;
  * @author cesaralx
  */
 public abstract class datosUsuario {
-    frmUsuario user;
+        private frmUsuario user;
+  
      
      public static void insertarDatos(frmUsuario b ) {
 
-       b.aUser[b.cUser]= new Usuario("Admin", "123", b.cUser);b.cUser++;
-       b.aUser[b.cUser]= new Usuario("Ventas", "123", b.cUser);b.cUser++;
-       b.aUser[b.cUser]= new Usuario("Supervisor", "123", b.cUser);b.cUser++;
+       b.aUser[b.cUser]= new Usuario("Admin", "123", b.cUser,b.aEmp[0]);b.cUser++;
+       b.aUser[b.cUser]= new Usuario("Ventas", "123", b.cUser,b.aEmp[1]);b.cUser++;
+       b.aUser[b.cUser]= new Usuario("Supervisor", "123", b.cUser,b.aEmp[b.cUser]);b.cUser++;
     
       } 
      
-     public static void insertarUsuario(frmUsuario b, frmRegUsuario u) {
+     public static void insertarUsuario( Usuario u) {
+           frmUsuario user = new frmUsuario();
+        
+//         user.aUser[user.cUser].setContrasena(u.getContrasena());
+//         user.aUser[user.cUser].setCuenta(u.getCuenta());
+//         user.aUser[user.cUser].setEmpleado(u.getEmpleado());
+//         user.aUser[user.cUser].setNumUsr(u.getNumUsr());
+//         user.cUser++;
+        
+        
+
+        user.aUser[user.cUser]= u ;user.cUser++;
          
-             b.aUser[b.cUser]= new Usuario(u.cboEmpleadoU1.getSelectedItem().toString(), u.jtbPass1.getText(), Integer.parseInt(u.jtbId.getText()));b.cUser++;
-         
-//              u.setNumUsr(Integer.parseInt(idusuario));
-//                u.setContrasena(m.aUser[pos].getContrasena());
-//                u.setCuenta(m.aUser[pos].getCuenta());
+//             b.aUser[b.cUser]= new Usuario(u.cboEmpleadoU1.getSelectedItem().toString(), u.jtbPass1.getText(), Integer.parseInt(u.jtbId.getText()));b.cUser++;
+//         
+////              u.setNumUsr(Integer.parseInt(idusuario));
+////                u.setContrasena(m.aUser[pos].getContrasena());
+////                u.setCuenta(m.aUser[pos].getCuenta());
            
        
     }
      
-     public static Usuario buscarUsuario(String idusuario, frmUsuario m)  {
-        return buscarUsuario(idusuario, m, null);
+     public static Usuario buscarUsuario(String idusuario)  {
+        return buscarUsuario(idusuario, null);
     }
 
-    public static Usuario buscarUsuario(String idusuario, frmUsuario m, Usuario u)   {
+    public static Usuario buscarUsuario(String idusuario, Usuario u)   {
+           frmUsuario m = new frmUsuario();
         int pos=0;
            boolean encontrado  = false;
             
@@ -59,8 +75,7 @@ public abstract class datosUsuario {
                 u.setNumUsr(Integer.parseInt(idusuario));
                 u.setContrasena(m.aUser[pos].getContrasena());
                 u.setCuenta(m.aUser[pos].getCuenta());
-            
-            
+                u.setEmpleado(m.aUser[pos].getEmpleado());
             return u; 
         
     }
@@ -108,6 +123,7 @@ public abstract class datosUsuario {
         user.aUser[pos].setContrasena(u.getContrasena());
              user.aUser[pos].setCuenta(u.getCuenta());
                   user.aUser[pos].setNumUsr(u.getNumUsr());
+                  user.aUser[pos].setEmpleado(u.getEmpleado());
         
         if (encontrado == true ) {
             return true;
@@ -126,6 +142,7 @@ public abstract class datosUsuario {
              e.setContrasena(user.aUser[i].getContrasena());
              e.setCuenta(user.aUser[i].getCuenta());
              e.setNumUsr(user.aUser[i].getNumUsr());
+             e.setEmpleado(user.aUser[i].getEmpleado());
  
             lista.add(e);
         }
