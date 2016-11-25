@@ -16,20 +16,23 @@ public class Producto {
     private int stock;
     private Categoria categoria;
     private float preciounidad;
+    private String imagen;
 
     public Producto() {
         this.setIdProducto(441);
         this.setNombre("Cocacola");
         this.setPreciounidad(9);
         this.setStock(41);
+        this.setImagen("c:");
     }
 
-    public Producto(int idProducto, String nombre, int stock, Categoria categoria, float preciounidad) {
+    public Producto(int idProducto, String nombre, int stock, Categoria categoria, float preciounidad, String imagen) {
         this.idProducto = idProducto;
         this.nombre = nombre;
         this.stock = stock;
         this.categoria = categoria;
         this.preciounidad = preciounidad;
+        this.imagen = imagen;
     }
 
     public int getIdProducto() {
@@ -70,6 +73,13 @@ public class Producto {
 
     public void setPreciounidad(float preciounidad) {
         this.preciounidad = preciounidad;
+    }
+      public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 
     

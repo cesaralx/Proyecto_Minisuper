@@ -19,6 +19,8 @@ public class Proveedor {
     private String lugar;
     private String direccion;
     private String giro;
+    private String nombre;
+    private String id;
 
     public Proveedor() {
         this.setRfc("RTER4534");
@@ -29,18 +31,22 @@ public class Proveedor {
         this.setLugar("Guadalajara");
         this.setDireccion("Calle roja #474");
         this.setGiro("Bebidas");
+        this.setNombre("Bebidas");
+        this.setId("Bebidas");
         
     }
 
-    public Proveedor(String ruc, String razonSocial, int telefono, int celular, String email, String lugar, String direccion, String tipo) {
-        this.rfc = ruc;
+    public Proveedor(String rfc, String razonSocial, int telefono, int celular, String email, String lugar, String direccion, String giro, String nombre, String id) {
+        this.rfc = rfc;
         this.razonSocial = razonSocial;
         this.telefono = telefono;
         this.celular = celular;
         this.email = email;
         this.lugar = lugar;
         this.direccion = direccion;
-        this.giro = tipo;
+        this.giro = giro;
+        this.nombre = nombre;
+        this.id = id;
     }
 
     public String getRfc() {
@@ -106,6 +112,26 @@ public class Proveedor {
     public void setGiro(String giro) {
         this.giro = giro;
     }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+   
+
+    
     
     
     
