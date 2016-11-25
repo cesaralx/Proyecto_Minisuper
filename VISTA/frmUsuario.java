@@ -4,24 +4,37 @@ package VISTA;
 
 import DATOS.*;
 import MODELO.*;
+import java.awt.BorderLayout;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 
 public class frmUsuario extends javax.swing.JFrame {
+    frmPanelFondoLogin fondoLog = new frmPanelFondoLogin();
+    
 
     //ARREGLOS DE OBJETOS
 
     public Usuario aUser[] = new Usuario[100];
     public Cliente aCli[] = new Cliente[100];
     public Producto aProd[] = new Producto[100];
-     public Proveedor aProv[] = new Proveedor[100];
-     public Empleado aEmp[] = new Empleado[100];
+    public Proveedor aProv[] = new Proveedor[100];
+    public Empleado aEmp[] = new Empleado[100];
+    public Compra aCom[] = new Compra[100];
+    public Categoria aCat[] = new Categoria[100];
+    public Transaccion aTran[] = new Transaccion[100];
+    public DetalleProveedor aDProv[] = new DetalleProveedor[100];
+     
     
     //VARIABLES CONTROLADORAS
     public int cCli=0;
     public int cProd=0;
     public int cUser=0;
-     public int cProv=0;
-     public int cEmp=0;
+    public int cProv=0;
+    public int cEmp=0;
+    public int cCom=0;
+    public int cCat=0;
+    public int cTran=0;
+    public int cAProv=0;
     
     //VARIABLES DE USO LOCAL
      
@@ -30,7 +43,7 @@ public class frmUsuario extends javax.swing.JFrame {
 
      
     public frmUsuario() {
-        initComponents();
+//        initComponents();
         //INICIALIZAR ARREGLOS
         for (int i = 0; i < 100; i++) {
             aUser[i] = new Usuario();
@@ -39,9 +52,28 @@ public class frmUsuario extends javax.swing.JFrame {
             aProv[i] = new Proveedor(); 
             aEmp[i] = new Empleado(); 
         }
+            
+        //CREAR FONDO DE LOGIN
+            try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        this.setUndecorated(true);
+      initComponents();
+        this.setSize(500, 300);
+        this.add(fondoLog, BorderLayout.CENTER);
+        this.setLocationRelativeTo(null);
+        this.pack();
+        
+      
+//cargaDatos
       datosUsuario.insertarDatos(this); 
       datosEmpleado.insertarDatos(this);
-//cargaDatos();
+      datosProducto.insertarDatos(this);
+      datosCategoria.insertarDatos(this);
+      datosCliente.insertarDatos(this);
+      datosProveedor.insertarDatos(this);
     
     }
     
@@ -106,20 +138,22 @@ public class frmUsuario extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jbnAceptar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jbnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jbnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jlbContrasena)
-                            .addComponent(jlbUsuario))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jtfUsuario)
-                            .addComponent(jpfContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jbnSalir)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jlbContrasena)
+                                    .addComponent(jlbUsuario))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jtfUsuario)
+                                    .addComponent(jpfContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(51, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -134,10 +168,10 @@ public class frmUsuario extends javax.swing.JFrame {
                     .addComponent(jlbContrasena)
                     .addComponent(jpfContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jbnAceptar, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
-                    .addComponent(jbnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addComponent(jbnAceptar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jbnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         getAccessibleContext().setAccessibleParent(this);
